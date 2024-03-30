@@ -21,8 +21,8 @@ app.use(cookieParser());
 // cors => cross origin resource sharing
 app.use(
   cors({
-    // origin: ['http://localhost:3000'],
-    origin: ['https://www.learnifyhub.co'],
+    origin: ['http://localhost:3000'],
+    // origin: ['https://www.learnifyhub.co'],
     credentials: true,
   })
 );
