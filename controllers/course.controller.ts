@@ -470,7 +470,8 @@ export const deleteCourse = CatchAsyncError(
 export const generateVideoUrl = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { videoId } = await req.body;
+      const { videoId } = req.body;
+      console.log(videoId);
       res.json({ otp: videoId });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
