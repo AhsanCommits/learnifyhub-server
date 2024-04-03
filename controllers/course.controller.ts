@@ -469,12 +469,8 @@ export const deleteCourse = CatchAsyncError(
 // generate video url
 export const generateVideoUrl = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { videoId } = req.body;
-      console.log(videoId);
-      res.json({ otp: videoId });
-    } catch (error: any) {
-      return next(new ErrorHandler(error.message, 400));
-    }
+    const { videoId } = req.body;
+    console.log(videoId);
+    res.json({ otp: videoId });
   }
 );
