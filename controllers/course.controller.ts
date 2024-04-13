@@ -75,6 +75,7 @@ export const editCourse = CatchAsyncError(
         { new: true }
       );
 
+      console.log(course);
       res.status(201).json({
         success: true,
         course,
