@@ -12,6 +12,8 @@ import sendMail from '../utils/sendMail';
 import NotificationModel from '../models/notification.Model';
 import axios from 'axios';
 
+import { ObjectId } from 'mongodb';
+
 // upload course
 export const uploadCourse = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -43,6 +45,8 @@ export const editCourse = CatchAsyncError(
 
       const thumbnail = data.thumbnail;
 
+      data.courseData = data.courseContent;
+
       const courseId = req.params.id;
 
       const courseData = (await CourseModel.findById(courseId)) as any;
@@ -68,7 +72,7 @@ export const editCourse = CatchAsyncError(
       }
 
       const course = await CourseModel.findByIdAndUpdate(
-        courseId,
+        new ObjectId(courseId),
         {
           $set: data,
         },
@@ -79,8 +83,10 @@ export const editCourse = CatchAsyncError(
       res.status(201).json({
         success: true,
         course,
+        payloadReceived: data,
       });
     } catch (error: any) {
+      console.log({ error });
       return next(new ErrorHandler(error.message, 500));
     }
   }
