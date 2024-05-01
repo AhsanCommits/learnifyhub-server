@@ -89,9 +89,9 @@ export const createOrder = CatchAsyncError(
 
       user?.courses.push(course?._id);
 
-      await redis.set(req.user?._id, JSON.stringify(user));
-
       await user?.save();
+
+      await redis.set(req.user?._id, JSON.stringify(user));
 
       await NotificationModel.create({
         user: user?._id,
